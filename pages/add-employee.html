@@ -243,12 +243,12 @@
                                         <div class="row justify-content-center" id="personalDownload" hidden>
                                             <h6>Personal Photo : </h6>
                                             <button id="PersonalServerName" class="btn btn-link"
-                                                onClick="return downloadAttachment(this,'Profile','personalInfo','loader1')"
+                                                onClick="return downloadAttachment(this,'Profile','personalInfo','profileImageLoader')"
                                                 style="color: blue;">
                                             </button>
-                                            <div id="loader1"
+                                            <div id="profileImageLoader"
                                                 style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
-                                                <h6><i id="loader1" class="fa fa-spinner fa-spin"></i>
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
                                                     Downlading...
                                                 </h6>
                                             </div>
@@ -269,7 +269,7 @@
                                                     <div class="col-sm-9">
                                                         <select class="form-control" id="gender" name="gender"
                                                             onchange="removeError1(this)">
-                                                            <option></option>
+                                                            <option value="">Select</option>
                                                             <option>Male</option>
                                                             <option>Female</option>
                                                             <option>Other</option>
@@ -294,7 +294,7 @@
                                                     <label class="col-sm-3 col-form-label">Blood Grp</label>
                                                     <div class="col-sm-9">
                                                         <select class="form-control" id="bloodGrp" name="bloodGrp">
-                                                            <option></option>
+                                                            <option value="">Select</option>
                                                             <option>A+</option>
                                                             <option>A-</option>
                                                             <option>B+</option>
@@ -318,7 +318,7 @@
                                                     <div class="col-sm-9">
                                                         <select class="form-control" id="loc" name="loc"
                                                             onchange="removeError1(this)">
-                                                            <option></option>
+                                                            <option value="">Select</option>
                                                             <option>Site</option>
                                                             <option>Office</option>
                                                         </select>
@@ -331,7 +331,7 @@
                                                     <div class="col-sm-9">
                                                         <select class="form-control" id="plant" name="plant"
                                                             onchange="removeError1(this)">
-                                                            <option></option>
+                                                            <option value="">Select</option>
                                                             <option>Gavhan</option>
                                                             <option>Kundevahal</option>
                                                         </select>
@@ -370,7 +370,7 @@
                                                     <div class="col-sm-9">
                                                         <select class="form-control" id="posApplied" name="posApplied"
                                                             onchange="removeError1(this)">
-                                                            <option></option>
+                                                            <option value="">Select</option>
                                                             <option>Operator</option>
                                                             <option>Site manager</option>
                                                             <option>Labor</option>
@@ -385,7 +385,7 @@
                                                     <div class="col-sm-9">
                                                         <select class="form-control" id="maritalStatus"
                                                             name="maritalStatus">
-                                                            <option></option>
+                                                            <option value="">Select</option>
                                                             <option>Single</option>
                                                             <option>Married</option>
                                                             <option>Divorced</option>
@@ -411,9 +411,16 @@
                                         </div>
                                         <div class="row justify-content-center" id="aadharDownload" hidden>
                                             <h6>Aadhar file : </h6>
-                                            <a id="aadharServerName"
-                                                onClick="downloadAttachment(this,'Aadhar','personalInfo')"
-                                                style="color: blue;" href="javascript:void(0)"></a>
+                                            <button id="aadharServerName" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'Aadhar','personalInfo','aadharImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="aadharImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -430,9 +437,16 @@
                                         </div>
                                         <div class="row justify-content-center" id="panDownload" hidden>
                                             <h6>Pancard file : </h6>
-                                            <h6 id="panServerName"
-                                                onClick="downloadAttachment(this,'Pan','personalInfo')"
-                                                style="color: blue;" href="javascript:void(0)"></a>
+                                            <button id="panServerName" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'Pan','personalInfo','panImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="panImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -450,9 +464,16 @@
                                         </div>
                                         <div class="row justify-content-center" id="licenseDownload" hidden>
                                             <h6>License file : </h6>
-                                            <a id="licenseServerName"
-                                                onClick="downloadAttachment(this,'Driving','personalInfo')"
-                                                style="color: blue;" href="javascript:void(0)"></a>
+                                            <button id="licenseServerName" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'Driving','personalInfo','licenseImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="licenseImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
                                         </div>
                                         <div id="residentialAddress">
                                             <label class="my-4 font-weight-bold">Residential Address :</label>
@@ -599,7 +620,7 @@
                                         <div style="text-align: end; margin: 20px;">
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#eductaionModal" id="openEductaionModal"
-                                                onclick="addDataFormModal('eductaionModal','educationalInfo')"
+                                                onclick="addDataFormModal('eductaionModal','educationalInfo','educationImageName')"
                                                 style="justify-content: flex-end;">
                                                 Add new
                                             </button>
@@ -639,11 +660,11 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label class="form-label"><small>Degree
+                                                                            <label class=" form-label"><small>Percetage
                                                                                     <span
                                                                                         class="required text-danger">(*)</span></small></label>
-                                                                            <input type="text" class="form-control"
-                                                                                id="degree" name="degree" />
+                                                                            <input type="number" class="form-control"
+                                                                                id="percentage" name="percentage" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
@@ -659,17 +680,30 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label class=" form-label"><small>Percetage
+                                                                            <label class="form-label"><small>Degree
                                                                                     <span
                                                                                         class="required text-danger">(*)</span></small></label>
-                                                                            <input type="number" class="form-control"
-                                                                                id="percentage" name="percentage" />
+                                                                            <select class="form-control"
+                                                                                onchange="removeError1(this); otherDegreeShowTextField('degree')"
+                                                                                id="degree">
+                                                                                <option value="">Select</option>
+                                                                                <option>Below SSC
+                                                                                </option>
+                                                                                <option>SSC</option>
+                                                                                <option>HSC</option>
+                                                                                <option>Under Graduate</option>
+                                                                                <option>Post Graduate</option>
+                                                                                <option>Other</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-md-6">
+                                                                    <div class="col-md-6" id="otherDegree" hidden>
                                                                         <div class="form-group">
-                                                                            <div class="col-sm-9">
-                                                                            </div>
+                                                                            <label class="form-label"><small>Degree
+                                                                                    Name<span
+                                                                                        class="required text-danger">(*)</span></small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="other" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -680,6 +714,22 @@
                                                                     id="eduAttachment" name="attachment" hidden />
                                                                 <input type="text" class="form-control"
                                                                     id="eduExtension" name="extension" hidden />
+                                                                <div class="row justify-content-center "
+                                                                    id="educationalInfoDownload" hidden>
+                                                                    <h6>Attachment : </h6>
+                                                                    <button id="educationalInfoImage"
+                                                                        class="btn btn-link"
+                                                                        onClick="return downloadAttachment(this,'listId','educationalInfo','educationImageLoader')"
+                                                                        style="color: blue;">
+                                                                    </button>
+                                                                    <div id="educationImageLoader"
+                                                                        style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                                        <h6><i class="fa fa-spinner fa-spin"></i>
+                                                                            Downlading...
+                                                                        </h6>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="text" id="educationalInfoListId" hidden />
                                                             </div>
                                                         </form>
                                                     </div>
@@ -805,6 +855,19 @@
                                             hidden />
                                         <input type="text" class="form-control" id="bankExtension" name="extension"
                                             hidden />
+                                        <div class="row justify-content-center " id="bankDownload" hidden>
+                                            <h6>Attachment : </h6>
+                                            <button id="bankImage" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'bankImage','bankDetails','bankImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="bankImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
+                                        </div>
                                         <div class="text-center">
                                             <button type="button" class="btn btn-primary btn-lg" href="#"
                                                 style="margin-top: 50px;" id="saveBank"
@@ -837,88 +900,66 @@
                                                     <div class="modal-body text-dark">
                                                         <form class="form-sample" id="empHistory">
                                                             <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Company<span
+                                                                                    class="required text-danger">(*)</span></small></label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="company" name="company" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Date of
+                                                                                Joining<span
+                                                                                    class="required text-danger"></span></small></label>
+                                                                        <input type="date" class="form-control"
+                                                                            id="hisDOJ" name="doj"
+                                                                            onchange="removeError1(this)" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Last
+                                                                                Working Day<span
+                                                                                    class="required text-danger"></span></small></label>
+                                                                        <input type="date" class="form-control" id="lwd"
+                                                                            name="lwd" onchange="removeError1(this)" />
+                                                                    </div>
+                                                                </div>
                                                                 <div class=" col-md-6">
                                                                     <div class="form-group">
                                                                         <label class="form-label"><small>Position
                                                                                 Held<span
-                                                                                    class="required text-danger">(*)</span></small></label>
+                                                                                    class="required text-danger"></span></small></label>
                                                                         <input type="text" class="form-control"
                                                                             id="positionHeld" name="positionHeld" />
                                                                     </div>
                                                                 </div>
-                                                                <!-- <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Position
-                                                                            Held</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" class="form-control"
-                                                                                id="positionHeld" name="positionHeld" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div> -->
-                                                                <div class=" col-md-6">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
                                                                     <div class="form-group">
-                                                                        <label class="form-label"><small>Date of
-                                                                                Joining<span
-                                                                                    class="required text-danger">(*)</span></small></label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="passingYear" name="passingYear" />
+                                                                        <label class="form-label"><small>Responsibities<span
+                                                                                    class="required text-danger"></span></small></label>
+
+                                                                        <input type="text" class="form-control"
+                                                                            id="responsibities" name="responsibities" />
+
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Date of
-                                                                            Joining</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="date" class="form-control"
-                                                                                id="hisDOJ" name="doj"
-                                                                                onchange="removeError1(this)" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Last
-                                                                            Working Day</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="date" class="form-control"
-                                                                                id="lwd" name="lwd"
-                                                                                onchange="removeError1(this)" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <label
-                                                                            class="col-sm-3 col-form-label">Company</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" class="form-control"
-                                                                                id="company" name="company" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <label
-                                                                            class="col-sm-3 col-form-label">Responsibities</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="text" class="form-control"
-                                                                                id="responsibities"
-                                                                                name="responsibities" />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Cost To
-                                                                            Company</label>
-                                                                        <div class="col-sm-9">
+                                                                    <div class="form-group">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"><small>Cost
+                                                                                    To
+                                                                                    Company<span
+                                                                                        class="required text-danger"></span></small></label>
                                                                             <input type="number" class="form-control"
                                                                                 id="costToComp" name="costToComp" />
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -926,19 +967,15 @@
 
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <label
-                                                                            class="col-sm-3 col-form-label">Expirence</label>
-                                                                        <div class="col-sm-9">
-                                                                            <input type="number" class="form-control"
-                                                                                id="exp" name="exp" />
-                                                                        </div>
+                                                                    <div class="form-group ">
+                                                                        <label class="form-label"><small>Expirence<span
+                                                                                    class="required text-danger"></span></small></label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="exp" name="exp" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-sm-9">
-                                                                        </div>
+                                                                    <div class="form-group ">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -949,6 +986,22 @@
                                                                 name="attachment" hidden />
                                                             <input type="text" class="form-control"
                                                                 id="empHistExtension" name="extension" hidden />
+                                                            <div class="row justify-content-center "
+                                                                id="empHistoryDownload" hidden>
+                                                                <h6>Attachment : </h6>
+                                                                <button id="empHistoryImage" class="btn btn-link"
+                                                                    onClick="return downloadAttachment(this,'empHistoryListId','empHistory','histImageLoader')"
+                                                                    style="color: blue;">
+                                                                </button>
+                                                                <div id="histImageLoader"
+                                                                    style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                                    <h6><i class="fa fa-spinner fa-spin"></i>
+                                                                        Downlading...
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text" class="form-control"
+                                                                id="empHistoryListId" hidden />
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
@@ -970,10 +1023,10 @@
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <th scope="col">index</th>
+                                                        <th scope="col">Company</th>
                                                         <th scope="col">Position Held</th>
                                                         <th scope="col">Date Of Joining</th>
                                                         <th scope="col">Last Working Day</th>
-                                                        <th scope="col">Company</th>
                                                         <th scope="col">Responsibities</th>
                                                         <th scope="col">Cost To Company</th>
                                                         <th scope="col">Expirence</th>

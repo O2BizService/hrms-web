@@ -2,12 +2,16 @@ const SERVER_URL = getServerUrl();
 var edit = location.search.split('=')[0].indexOf('edit') == 1;
 var employeeData;
 var personalInfoData;
+var isEditEducationScreen;
+var isEditBankDetails = false;
+var isEditHistDetails;
 
 function hideDivWhenTrue(obj, id) {
     if (obj.checked) {
         $('#' + id).hide()
     }
 }
+
 function isSameAddress(obj) {
     if (obj.checked) {
         hideDivWhenTrue(obj, "permenantAddress");
@@ -19,7 +23,10 @@ function isSameAddress(obj) {
         $("#permenantAddress").show();
     }
 }
+
 function addDataFormModal(id, fomrId) {
+    isEditEducationScreen = false;
+    isEditHistDetails = false;
     clearForm(fomrId);
     $('#' + id).modal("show");
 }
@@ -131,8 +138,22 @@ function downloadAttachment(obj, attachmentId, formName, loader) {
     var map = {};
     map["id"] = employeeData.id;
     if (formName == "personalInfo") {
-        map["screen"] = "personalInfo";
+        map["screen"] = formName;
         map["docType"] = attachmentId;
+        map["fileName"] = $(obj).html();
+    }
+    if (formName == "educationalInfo") {
+        map["screen"] = formName;
+        map["listID"] = $("#" + attachmentId).val();
+        map["fileName"] = $(obj).html();
+    }
+    if (formName == 'bankDetails') {
+        map["screen"] = formName;
+        map["fileName"] = $(obj).html();
+    }
+    if (formName == 'empHistory') {
+        map["screen"] = formName;
+        map["listID"] = $("#" + attachmentId).val();
         map["fileName"] = $(obj).html();
     }
     $.ajax({
@@ -143,26 +164,11 @@ function downloadAttachment(obj, attachmentId, formName, loader) {
         url: SERVER_URL + localStorage.getItem("clientCode") + "/download-attachment",
         data: JSON.stringify(map),
         complete: function (response) {
-            response;
-            // if (response.status == 200) {
-            //     ajaxEnd(formName);
-            //     if (formName == "personalInfo") {
-            //         uploadImage('attachment');
-            //         uploadImage('aadharAttach');
-            //         uploadImage('panAttach');
-            //         uploadImage('drivingAttach');
-            //         $("#permenantAddress").show();
-            //         if (response.responseJSON['msg'] != null) {
-            //             showModal('addEmployeeModal', response.responseJSON['msg']);
-            //         } else {
-            //             showModal('addEmployeeModal', response.responseJSON);
-            //         }
-            //     } else {
-            //         showModal('addEmployeeModal', response.responseJSON);
-            //     }
-            // } else {
-            //     showModal('addEmployeeModal', response.responseJSON);
-            // }
+            var byteArray = $.map(response.responseJSON, function (element) {
+                return element;
+            });
+            var Arr = base64ToArrayBuffer(byteArray);
+            saveByteArray($(obj).html(), Arr);
             $("#" + loader).css('display', 'none');
             $("#" + loader).css('visibility', 'hidden');
             $("#" + $(obj).attr('id')).show();
@@ -171,6 +177,26 @@ function downloadAttachment(obj, attachmentId, formName, loader) {
 
     return false;
 }
+
+function base64ToArrayBuffer(base64) {
+    var binaryString = window.atob(base64);
+    var binaryLen = binaryString.length;
+    var bytes = new Uint8Array(binaryLen);
+    for (var i = 0; i < binaryLen; i++) {
+        var ascii = binaryString.charCodeAt(i);
+        bytes[i] = ascii;
+    }
+    return bytes;
+}
+
+function saveByteArray(reportName, byte) {
+    var blob = new Blob([byte], { type: "application/jpg" });
+    var link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    var fileName = reportName;
+    link.download = fileName;
+    link.click();
+};
 
 function getFormData(form) {
     var unindexed_array = $(form).serializeArray();
@@ -404,6 +430,7 @@ function educationFormValidation(formName, saveBtn, clsBtn) {
     var splSub = form["splSub"].value;
     var percentage = form["percentage"].value;
     var attachment = form["eduAttachment"].value;
+    var other = form["other"].value;
 
     if (sclName == "") {
         addError($("#sclName"));
@@ -413,23 +440,40 @@ function educationFormValidation(formName, saveBtn, clsBtn) {
         addError($("#passingYear"));
         return false;
     }
-    if (degree == "") {
-        addError($("#degree"));
+    if (percentage == "") {
+        addError($("#percentage"));
         return false;
     }
     if (splSub == "") {
         addError($("#splSub"));
         return false;
     }
-    if (percentage == "") {
-        addError($("#percentage"));
+    if (degree == "") {
+        addError($("#degree"));
         return false;
     }
-    if (attachment == "") {
-        showModal('addEmployeeModal', 'Add marksheet file');
+    if (degree == "Other" && other == "") {
+        addError($("#other"));
         return false;
     }
+    if (isEditEducationScreen) {
+        if (employeeData.educationInfo[$("#educationalInfoListId").val() - 1].attachment != null) {
+        }
+    } else {
+        if (degree != "Below SSC" && attachment == "") {
+            showModal('addEmployeeModal', 'Add certificate file');
+            return false;
+        }
+    }
+
     addEmployee(formName, saveBtn, clsBtn);
+}
+function otherDegreeShowTextField(id) {
+    if ($("#" + id).val() == "Other") {
+        $("#otherDegree").attr("hidden", false)
+    } else {
+        $("#otherDegree").attr("hidden", true)
+    }
 }
 function bankingFormValidation(formName, saveBtn) {
     var form = document.forms[formName];
@@ -481,34 +525,35 @@ function historyFormValidation(formName, saveBtn, clsBtn) {
     var costToComp = form["costToComp"].value;
     var exp = form["exp"].value;
 
-    if (positionHeld == "") {
-        addError($("#positionHeld"));
-        return false;
-    }
-    if (hisDOJ == "") {
-        addError($("#hisDOJ"));
-        return false;
-    }
-    if (lwd == "") {
-        addError($("#lwd"));
-        return false;
-    }
+
     if (company == "") {
         addError($("#company"));
         return false;
     }
-    if (responsibities == "") {
-        addError($("#responsibities"));
-        return false;
-    }
-    if (costToComp == "") {
-        addError($("#costToComp"));
-        return false;
-    }
-    if (exp == "") {
-        addError($("#exp"));
-        return false;
-    }
+    // if (positionHeld == "") {
+    //     addError($("#positionHeld"));
+    //     return false;
+    // }
+    // if (hisDOJ == "") {
+    //     addError($("#hisDOJ"));
+    //     return false;
+    // }
+    // if (lwd == "") {
+    //     addError($("#lwd"));
+    //     return false;
+    // }
+    // if (responsibities == "") {
+    //     addError($("#responsibities"));
+    //     return false;
+    // }
+    // if (costToComp == "") {
+    //     addError($("#costToComp"));
+    //     return false;
+    // }
+    // if (exp == "") {
+    //     addError($("#exp"));
+    //     return false;
+    // }
     addEmployee(formName, saveBtn, clsBtn);
 }
 
@@ -522,42 +567,69 @@ function addEmployee(formName, saveBtn, clsBtn) {
             $('#pcountry').val($('#rcountry').val())
         }
     }
+
     var map = getFormData("#" + formName);
+    if (formName == "personalInfo") {
+        if (edit) {
+            if (personalInfoData.attachment != null || personalInfoData.attachment != "") {
+                map['attachment'] = personalInfoData.attachment;
+            } else if ($('#attachment').val() != null || $('#attachment').val() != "") {
+                map['attachment'] = $('#fName').val() + $('#lName').val() + '.jpg';
+            }
+        } else if ($('#attachment').val() != null || $('#attachment').val() != "") {
+            map['attachment'] = $('#fName').val() + $('#lName').val() + '.jpg';
+        }
+
+        if ($('#aadhar').val() != null || $('#aadhar').val() != "") {
+            if ($('#aadharAttach').val() != null || $('#aadharAttach').val() != "") {
+                map['aadharAttach'] = $('#aadhar').val() + '.jpg';
+            }
+        }
+
+        if ($('#pan').val() != null || $('#pan').val() != "") {
+            if ($('#panAttach').val() != null || $('#panAttach').val() != "") {
+                map['panAttach'] = $('#pan').val() + ".jpg";
+            }
+        }
+
+        if ($('#drivingLic').val() != null || $('#drivingLic').val() != "") {
+            if ($('#drivingAttach').val() != null || $('#drivingAttach').val() != "") {
+                map['drivingAttach'] = $('#drivingLic').val() + '.jpg';
+            }
+        }
+    }
     var reqFor = "";
     map['screen'] = formName;
     if (edit) {
         reqFor = "/edit-employee-details";
         map['id'] = location.search.split('=')[1];
+        if (formName == "educationalInfo") {
+            map['listID'] = $('#' + formName + "ListId").val();
+            if ($('#degree').val() == "Other") {
+                map['degree'] = $('#other').val();
+            } else {
+                map['degree'] = $('#degree').val();
+            }
+            if (isEditEducationScreen == false) {
+                reqFor = "/add-employee-details";
+            }
+        }
+        if (formName == "empHistory") {
+            map['listID'] = $('#' + formName + "ListId").val();
+            if (isEditHistDetails == false) {
+                reqFor = "/add-employee-details";
+            }
+        }
+        if (formName == "bankDetails") {
+            map['listID'] = $('#' + formName + "ListId").val();
+            if (isEditBankDetails == false) {
+                reqFor = "/add-employee-details";
+            }
+        }
     } else {
         reqFor = "/add-employee-details";
     }
-    if (edit) {
-        if (personalInfoData.attachment != null || personalInfoData.attachment != "") {
-            map['attachment'] = personalInfoData.attachment;
-        } else if ($('#attachment').val() != null || $('#attachment').val() != "") {
-            map['attachment'] = $('#fName').val() + $('#lName').val() + '.jpg';
-        }
-    } else if ($('#attachment').val() != null || $('#attachment').val() != "") {
-        map['attachment'] = $('#fName').val() + $('#lName').val() + '.jpg';
-    }
 
-    if ($('#aadhar').val() != null || $('#aadhar').val() != "") {
-        if ($('#aadharAttach').val() != null || $('#aadharAttach').val() != "") {
-            map['aadharAttach'] = $('#aadhar').val() + '.jpg';
-        }
-    }
-
-    if ($('#pan').val() != null || $('#pan').val() != "") {
-        if ($('#panAttach').val() != null || $('#panAttach').val() != "") {
-            map['panAttach'] = $('#pan').val() + ".jpg";
-        }
-    }
-
-    if ($('#drivingLic').val() != null || $('#drivingLic').val() != "") {
-        if ($('#drivingAttach').val() != null || $('#drivingAttach').val() != "") {
-            map['drivingAttach'] = $('#drivingLic').val() + '.jpg';
-        }
-    }
     $("#" + saveBtn).html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;&nbsp;Please Wait ...').prop('disabled', true);
     $("#" + clsBtn).hide();
 
@@ -583,8 +655,10 @@ function addEmployee(formName, saveBtn, clsBtn) {
                         showModal('addEmployeeModal', response.responseJSON);
                     }
                 } else {
+                    $("#otherDegree").attr("hidden", true)
                     showModal('addEmployeeModal', response.responseJSON);
                 }
+
             } else {
                 showModal('addEmployeeModal', response.responseJSON);
             }
@@ -594,6 +668,7 @@ function addEmployee(formName, saveBtn, clsBtn) {
     });
     return false;
 }
+
 
 function uploadImage(fileid) {
     if ($('#' + fileid).val() != null || $('#' + fileid).val() != "") {
@@ -623,6 +698,8 @@ function ajaxEnd(formName) {
 
 function clearForm(formName) {
     document.getElementById(formName).reset();
+    $("#" + formName + 'Download').attr('hidden', true);
+    $("#" + formName + 'Image').html('');
 }
 
 function errorRequest() {
@@ -653,7 +730,7 @@ function getAllEployeeDetails() {
             $(response).each(function (index, obj) {
                 var str = "<tr><td>" + (++index) + "</td><td class='roleClass'>" + emptyIfNull($(obj).attr('fName')) + "</td><td>" + emptyIfNull($(obj).attr('lName')) + "</td><td>" + emptyIfNull($(obj).attr('mobile')) + "</td><td>" + emptyIfNull($(obj).attr('plant')) + "</td><td>" + emptyIfNull($(obj).attr('loc')) + "</td>";
                 str += '<td>';
-                str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + $(obj).attr('id') + '" onClick="editEmployee(this)"><i class="fa fa-edit"></i></button>';
+                str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + $(obj).attr('id') + '" onClick="editEmployeeScreen(this)"><i class="fa fa-edit"></i></button>';
                 str += '&nbsp;&nbsp;';
                 str += '<button type="button" class="btn btn-danger" title="Remove" alt="Remove" data-id="' + $(obj).attr('id') + '" onClick="deleteEmployeeModal(this)"><i class="fa fa-trash"></i></button>';
                 str += '</td></tr>';
@@ -668,7 +745,7 @@ function getAllEployeeDetails() {
     return false;
 }
 
-function editEmployee(obj) {
+function editEmployeeScreen(obj) {
     location.href = "add-employee.html?edit.id=" + obj.dataset.id;
     getEployeeDetails(obj.dataset.id);
 }
@@ -764,9 +841,27 @@ function empEducationInfoTable(data) {
     $('#educationTable').DataTable({ "pageLength": 10 });
 }
 function editEducation(data) {
+    isEditEducationScreen = true;
+    if (data.dataset.attachment != null) {
+        $('#educationalInfoImage').html(data.dataset.attachment);
+        $('#educationalInfoDownload').attr('hidden', false);
+    } else {
+        $('#educationalInfoDownload').attr('hidden', true);
+    }
+    $('#educationalInfoListId').val(data.dataset.id);
     $('#sclName').val(data.dataset.name);
     $('#passingYear').val(data.dataset.passingyear);
-    $('#degree').val(data.dataset.degree);
+    var list = ['Below SSC', 'SSC', 'HSC', 'Under Graduate'];
+    $.each(list, function (index, value) {
+        if (data.dataset.degree == value) {
+            $('#degree').val(value);
+            return false;
+        } else {
+            $("#otherDegree").attr("hidden", false);
+            $('#degree').val('Other');
+            $('#other').val(data.dataset.degree);
+        }
+    });
     $('#splSub').val(data.dataset.splsub);
     $('#percentage').val(data.dataset.percentage);
     $('#eductaionModal').modal("show");
@@ -775,6 +870,11 @@ function deleteEducation(data) {
 
 }
 function empBankInfo(data) {
+    isEditBankDetails = true;
+    if (data.attachment != null) {
+        $('#bankImage').html(data.attachment);
+        $('#bankDownload').attr('hidden', false);
+    }
     $('#bankAccName').val(emptyIfNull(data.bankAccName));
     $('#bankName').val(emptyIfNull(data.bankName));
     $('#bankAccNo').val(emptyIfNull(data.bankAccNo));
@@ -788,9 +888,9 @@ function empHistInfoTable(data) {
     $('#empHistoryTable').DataTable().destroy();
     $("#empHistoryTableBody").html('');
     $(data).each(function (index, obj) {
-        var str = "<tr><td>" + (++index) + "</td><td class='roleClass'>" + emptyIfNull($(obj).attr('positionHeld')) + "</td><td>" + emptyIfNull($(obj).attr('hisDOJ')) + "</td><td>" + emptyIfNull($(obj).attr('lwd')) + "</td><td>" + emptyIfNull($(obj).attr('company')) + "</td><td>" + emptyIfNull($(obj).attr('responsibities')) + "</td><td>" + emptyIfNull($(obj).attr('costToComp')) + "</td><td>" + emptyIfNull($(obj).attr('exp')) + "</td>";
+        var str = "<tr><td>" + (++index) + "</td><td>" + emptyIfNull($(obj).attr('company')) + "</td><td class='roleClass'>" + emptyIfNull($(obj).attr('positionHeld')) + "</td><td>" + emptyIfNull($(obj).attr('hisDOJ')) + "</td><td>" + emptyIfNull($(obj).attr('lwd')) + "</td><td>" + emptyIfNull($(obj).attr('responsibities')) + "</td><td>" + emptyIfNull($(obj).attr('costToComp')) + "</td><td>" + emptyIfNull($(obj).attr('exp')) + "</td>";
         str += '<td>';
-        str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + $(obj).attr('listID') + '" data-positionheld = "' + $(obj).attr('positionHeld') + '" data-doj = "' + $(obj).attr('doj') + '"  data-lwd = "' + $(obj).attr('lwd') + '" data-company = "' + $(obj).attr('company') + '" data-responsibities = "' + $(obj).attr('responsibities') + '" data-costtocomp = "' + $(obj).attr('costToComp') + '" data-exp = "' + $(obj).attr('exp') + '"  data-attachment = "' + $(obj).attr('attachment') + '" onClick="editHistory(this)"><i class="fa fa-edit"></i></button>';
+        str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + emptyIfNull($(obj).attr('listID')) + '" data-positionheld = "' + emptyIfNull($(obj).attr('positionHeld')) + '" data-doj = "' + emptyIfNull($(obj).attr('doj')) + '"  data-lwd = "' + emptyIfNull($(obj).attr('lwd')) + '" data-company = "' + emptyIfNull($(obj).attr('company')) + '" data-responsibities = "' + emptyIfNull($(obj).attr('responsibities')) + '" data-costtocomp = "' + emptyIfNull($(obj).attr('costToComp')) + '" data-exp = "' + emptyIfNull($(obj).attr('exp')) + '"  data-attachment = "' + emptyIfNull($(obj).attr('attachment')) + '" onClick="editHistory(this)"><i class="fa fa-edit"></i></button>';
         str += '&nbsp;&nbsp;';
         str += '<button type="button" class="btn btn-danger" title="Remove" alt="Remove" data-id="' + $(obj).attr('id') + '" onClick="deleteEmployee(this)"><i class="fa fa-trash"></i></button>';
         str += '</td></tr>';
@@ -799,6 +899,14 @@ function empHistInfoTable(data) {
     $('#empHistoryTable').DataTable({ "pageLength": 10 });
 }
 function editHistory(data) {
+    isEditHistDetails = true;
+    if (data.dataset.attachment != "") {
+        $('#empHistoryImage').html(data.dataset.attachment);
+        $('#empHistoryDownload').attr('hidden', false);
+    } else {
+        $('#empHistoryDownload').attr('hidden', true);
+    }
+    $('#empHistoryListId').val(data.dataset.id);
     $('#positionHeld').val(data.dataset.positionheld);
     $('#hisDOJ').val(data.dataset.doj);
     $('#lwd').val(data.dataset.lwd);
