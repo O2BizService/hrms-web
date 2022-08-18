@@ -457,7 +457,11 @@ function educationFormValidation(formName, saveBtn, clsBtn) {
         return false;
     }
     if (isEditEducationScreen) {
-        if (employeeData.educationInfo[$("#educationalInfoListId").val() - 1].attachment != null) {
+        if (employeeData.educationInfo[$("#educationalInfoListId").val() - 1].attachment == null) {
+            if (degree != "Below SSC" && attachment == "") {
+                showModal('addEmployeeModal', 'Add certificate file');
+                return false;
+            }
         }
     } else {
         if (degree != "Below SSC" && attachment == "") {
@@ -832,7 +836,7 @@ function empEducationInfoTable(data) {
     $(data).each(function (index, obj) {
         var str = "<tr><td>" + (++index) + "</td><td class='roleClass'>" + emptyIfNull($(obj).attr('name')) + "</td><td>" + emptyIfNull($(obj).attr('passingYear')) + "</td><td>" + emptyIfNull($(obj).attr('degree')) + "</td><td>" + emptyIfNull($(obj).attr('splSub')) + "</td><td>" + emptyIfNull($(obj).attr('percentage')) + "</td>";
         str += '<td>';
-        str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + $(obj).attr('listID') + '" data-name = "' + $(obj).attr('name') + '" data-passingyear = "' + $(obj).attr('passingYear') + '"  data-degree = "' + $(obj).attr('degree') + '" data-splsub = "' + $(obj).attr('splSub') + '" data-percentage = "' + $(obj).attr('percentage') + '" data-attachment = "' + $(obj).attr('attachment') + '" onClick="editEducation(this)"><i class="fa fa-edit"></i></button>';
+        str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + emptyIfNull($(obj).attr('listID')) + '" data-name = "' + emptyIfNull($(obj).attr('name')) + '" data-passingyear = "' + emptyIfNull($(obj).attr('passingYear')) + '"  data-degree = "' + emptyIfNull($(obj).attr('degree')) + '" data-splsub = "' + emptyIfNull($(obj).attr('splSub')) + '" data-percentage = "' + emptyIfNull($(obj).attr('percentage')) + '" data-attachment = "' + emptyIfNull($(obj).attr('attachment')) + '" onClick="editEducation(this)"><i class="fa fa-edit"></i></button>';
         str += '&nbsp;&nbsp;';
         str += '<button type="button" class="btn btn-danger" title="Remove" alt="Remove" data-id="' + $(obj).attr('listID') + '" onClick="deleteEducation(this)"><i class="fa fa-trash"></i></button>';
         str += '</td></tr>';
@@ -840,9 +844,10 @@ function empEducationInfoTable(data) {
     });
     $('#educationTable').DataTable({ "pageLength": 10 });
 }
+
 function editEducation(data) {
     isEditEducationScreen = true;
-    if (data.dataset.attachment != null) {
+    if (data.dataset.attachment != "") {
         $('#educationalInfoImage').html(data.dataset.attachment);
         $('#educationalInfoDownload').attr('hidden', false);
     } else {
@@ -851,10 +856,12 @@ function editEducation(data) {
     $('#educationalInfoListId').val(data.dataset.id);
     $('#sclName').val(data.dataset.name);
     $('#passingYear').val(data.dataset.passingyear);
-    var list = ['Below SSC', 'SSC', 'HSC', 'Under Graduate'];
+    var list = ['Below SSC', 'SSC', 'HSC', 'Under Graduate', 'Post Graduate'];
     $.each(list, function (index, value) {
         if (data.dataset.degree == value) {
             $('#degree').val(value);
+            $('#other').val('');
+            $("#otherDegree").attr("hidden", true);
             return false;
         } else {
             $("#otherDegree").attr("hidden", false);
