@@ -1067,6 +1067,34 @@
                             </div>
                         </div>
                         <!-- Modal end -->
+                        <!-- Modal start -->
+                        <div class="modal fade" id="deleteInfoModal" tabindex="-1" aria-labelledby="ModalCenterTitle"
+                            style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content align-items-center">
+                                    <div class="modal-header" style="margin-top: 15px;">
+                                        <h5 id="contentText2">
+                                            Are you want to delete?
+                                        </h5>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <!-- <div class="col-3"></div> -->
+                                            <button type="button" class="btn btn-primary btn-sm align-self-center"
+                                                style="margin-top: 10px;margin-bottom: 10px;" data-bs-dismiss="modal"
+                                                id="No" onclick="closeModal('deleteInfoModal')">No</button>
+                                            <div class="col-1"></div>
+                                            <button type="button" class="btn btn-danger btn-sm align-self-center"
+                                                style="margin-top: 10px;margin-bottom: 10px;" data-bs-dismiss="modal"
+                                                id="Yes" onclick="deleteEducationAndHistory()">Yes</button>
+                                            <input type="text" id="deleteInfoId" hidden />
+                                            <!-- <div class="col-3"></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal end -->
                     </div>
                 </div>
             </div>

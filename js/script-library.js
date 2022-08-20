@@ -1,5 +1,6 @@
 const SERVER_URL = getServerUrl();
 var edit = location.search.split('=')[0].indexOf('edit') == 1;
+var empId = location.search.split('=')[1];
 var employeeData;
 var personalInfoData;
 var isEditEducationScreen;
@@ -606,7 +607,7 @@ function addEmployee(formName, saveBtn, clsBtn) {
     map['screen'] = formName;
     if (edit) {
         reqFor = "/edit-employee-details";
-        map['id'] = location.search.split('=')[1];
+        map['id'] = empId;
         if (formName == "educationalInfo") {
             map['listID'] = $('#' + formName + "ListId").val();
             if ($('#degree').val() == "Other") {
@@ -694,7 +695,7 @@ function ajaxEnd(formName) {
     $(document).ajaxStop(function () {
         if (edit) {
             clearForm(formName);
-            getEployeeDetails(location.search.split('=')[1]);
+            getEployeeDetails(empId);
             $(document).unbind("ajaxStop");
         }
     })
@@ -838,7 +839,7 @@ function empEducationInfoTable(data) {
         str += '<td>';
         str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + emptyIfNull($(obj).attr('listID')) + '" data-name = "' + emptyIfNull($(obj).attr('name')) + '" data-passingyear = "' + emptyIfNull($(obj).attr('passingYear')) + '"  data-degree = "' + emptyIfNull($(obj).attr('degree')) + '" data-splsub = "' + emptyIfNull($(obj).attr('splSub')) + '" data-percentage = "' + emptyIfNull($(obj).attr('percentage')) + '" data-attachment = "' + emptyIfNull($(obj).attr('attachment')) + '" onClick="editEducation(this)"><i class="fa fa-edit"></i></button>';
         str += '&nbsp;&nbsp;';
-        str += '<button type="button" class="btn btn-danger" title="Remove" alt="Remove" data-id="' + $(obj).attr('listID') + '" onClick="deleteEducation(this)"><i class="fa fa-trash"></i></button>';
+        str += '<button type="button" class="btn btn-danger" title="Remove" alt="Remove" data-id="' + $(obj).attr('listID') + '" onClick="deleteEduModal(this)"><i class="fa fa-trash"></i></button>';
         str += '</td></tr>';
         $("#educationTable").append(str);
     });
@@ -873,9 +874,40 @@ function editEducation(data) {
     $('#percentage').val(data.dataset.percentage);
     $('#eductaionModal').modal("show");
 }
-function deleteEducation(data) {
+var screenName;
 
+function deleteEduModal(obj) {
+    $("#deleteInfoId").val(obj.dataset.id);
+    screenName = 'educationalInfo';
+    showModal('deleteInfoModal');
 }
+// function deleteEducation() {
+//     $("#No").hide();
+//     $("#Yes").html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;&nbsp;Please Wait ...').prop('disabled', true);
+//     var map = { 'screen': 'educationalInfo', 'id': empId, 'listID': $("#deleteInfoId").val() }
+//     $.ajax({
+//         type: 'POST',
+//         headers: {
+//             'token': localStorage.getItem("token"),
+//         },
+//         url: SERVER_URL + localStorage.getItem("clientCode") + '/delete-employee-details',
+//         data: JSON.stringify(map),
+//         complete: function (response) {
+//             $("#deleteInfoId").val('');
+//             closeModal('deleteInfoModal');
+//             $("#No").show();
+//             $("#Yes").html('Yes').prop('disabled', false);
+//             if (response.status == 200) {
+//                 getEployeeDetails(empId);
+//                 showModal('addEmployeeModal', response.responseJSON);
+//             } else {
+//                 showModal('addEmployeeModal', response.responseJSON);
+//             }
+//         }
+//     });
+//     return false;
+// }
+
 function empBankInfo(data) {
     isEditBankDetails = true;
     if (data.attachment != null) {
@@ -899,7 +931,7 @@ function empHistInfoTable(data) {
         str += '<td>';
         str += '<button type="button" class="btn btn-primary" title="Edit" alt="Edit" data-id="' + emptyIfNull($(obj).attr('listID')) + '" data-positionheld = "' + emptyIfNull($(obj).attr('positionHeld')) + '" data-doj = "' + emptyIfNull($(obj).attr('doj')) + '"  data-lwd = "' + emptyIfNull($(obj).attr('lwd')) + '" data-company = "' + emptyIfNull($(obj).attr('company')) + '" data-responsibities = "' + emptyIfNull($(obj).attr('responsibities')) + '" data-costtocomp = "' + emptyIfNull($(obj).attr('costToComp')) + '" data-exp = "' + emptyIfNull($(obj).attr('exp')) + '"  data-attachment = "' + emptyIfNull($(obj).attr('attachment')) + '" onClick="editHistory(this)"><i class="fa fa-edit"></i></button>';
         str += '&nbsp;&nbsp;';
-        str += '<button type="button" class="btn btn-danger" title="Remove" alt="Remove" data-id="' + $(obj).attr('id') + '" onClick="deleteEmployee(this)"><i class="fa fa-trash"></i></button>';
+        str += '<button type="button" class="btn btn-danger" title="Remove" alt="Remove" data-id="' + $(obj).attr('listID') + '" onClick="deleteHistoryModal(this)"><i class="fa fa-trash"></i></button>';
         str += '</td></tr>';
         $("#empHistoryTable").append(str);
     });
@@ -923,18 +955,15 @@ function editHistory(data) {
     $('#exp').val(data.dataset.exp);
     $('#empHistoryModal').modal("show");
 }
-function deleteHistory(data) {
-
+function deleteHistoryModal(obj) {
+    $("#deleteInfoId").val(obj.dataset.id);
+    screenName = 'empHistory';
+    showModal('deleteInfoModal');
 }
-
-function deleteEmployeeModal(obj) {
-    localStorage.setItem('deleteId', obj.dataset.id);
-    showModal('employeeModal');
-}
-function deleteEmployee() {
+function deleteEducationAndHistory() {
     $("#No").hide();
     $("#Yes").html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;&nbsp;Please Wait ...').prop('disabled', true);
-    var map = { 'id': localStorage.getItem('deleteId') }
+    var map = { 'screen': screenName, 'id': empId, 'listID': $("#deleteInfoId").val() }
     $.ajax({
         type: 'POST',
         headers: {
@@ -943,6 +972,38 @@ function deleteEmployee() {
         url: SERVER_URL + localStorage.getItem("clientCode") + '/delete-employee-details',
         data: JSON.stringify(map),
         complete: function (response) {
+            $("#deleteInfoId").val('');
+            closeModal('deleteInfoModal');
+            $("#No").show();
+            $("#Yes").html('Yes').prop('disabled', false);
+            if (response.status == 200) {
+                getEployeeDetails(empId);
+                showModal('addEmployeeModal', response.responseJSON);
+            } else {
+                showModal('addEmployeeModal', response.responseJSON);
+            }
+        }
+    });
+    return false;
+}
+
+function deleteEmployeeModal(obj) {
+    $("#deleteEmployeeId").val(obj.dataset.id);
+    showModal('employeeModal');
+}
+function deleteEmployee() {
+    $("#No").hide();
+    $("#Yes").html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;&nbsp;Please Wait ...').prop('disabled', true);
+    var map = { 'id': $("#deleteEmployeeId").val() }
+    $.ajax({
+        type: 'POST',
+        headers: {
+            'token': localStorage.getItem("token"),
+        },
+        url: SERVER_URL + localStorage.getItem("clientCode") + '/delete-employee-details',
+        data: JSON.stringify(map),
+        complete: function (response) {
+            $("#deleteEmployeeId").val('');
             closeModal('employeeModal');
             $("#No").show();
             $("#Yes").html('Yes').prop('disabled', false);
