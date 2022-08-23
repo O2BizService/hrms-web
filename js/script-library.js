@@ -649,11 +649,12 @@ function addEmployee(formName, saveBtn, clsBtn) {
             if (response.status == 200) {
                 ajaxEnd(formName);
                 if (formName == "personalInfo") {
-                    uploadImage('attachment');
-                    uploadImage('aadharAttach');
-                    uploadImage('panAttach');
-                    uploadImage('drivingAttach');
+                    uploadImage('attachment', response.responseJSON['id']);
+                    uploadImage('aadharAttach', response.responseJSON['id']);
+                    uploadImage('panAttach', response.responseJSON['id']);
+                    uploadImage('drivingAttach', response.responseJSON['id']);
                     $("#permenantAddress").show();
+                    clearForm(formName);
                     if (response.responseJSON['msg'] != null) {
                         showModal('addEmployeeModal', response.responseJSON['msg']);
                     } else {
@@ -675,10 +676,10 @@ function addEmployee(formName, saveBtn, clsBtn) {
 }
 
 
-function uploadImage(fileid) {
+function uploadImage(fileid, id) {
     if ($('#' + fileid).val() != null || $('#' + fileid).val() != "") {
         var map = {};
-        map['id'] = employeeData.id;
+        map['id'] = id;
         map[fileid] = $('#' + fileid).val();
         $.ajax({
             type: 'POST',
