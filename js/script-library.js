@@ -995,7 +995,7 @@ function deleteEmployeeModal(obj) {
 function deleteEmployee() {
     $("#No").hide();
     $("#Yes").html('<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;&nbsp;Please Wait ...').prop('disabled', true);
-    var map = { 'id': $("#deleteEmployeeId").val() }
+    var map = { 'id': $("#deleteEmployeeId").val(), "screen": 'personalInfo' }
     $.ajax({
         type: 'POST',
         headers: {
