@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Employee</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <!----css3---->
+    <link rel="stylesheet" href="../css/custom.css">
+    <link rel="stylesheet" href="../css/myForm.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!--google material icon-->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" /> -->
+    <script src="https://kit.fontawesome.com/a9fe3d2c0d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="body-overlay"></div>
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3><img src="img/logo.png" class="img-fluid" /><span>HRMS</span></h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="dashboard.html" class="dashboard"><i
+                            class="material-icons">dashboard</i><span>Dashboard</span></a>
+                </li>
+
+                <div class="small-screen navbar-display">
+                    <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block">
+                        <a href="#homeSubmenu0" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="material-icons">notifications</i><span> 4 notification</span></a>
+                        <ul class="collapse list-unstyled menu" id="homeSubmenu0">
+                            <li>
+                                <a href="#">You have 5 new messages</a>
+                            </li>
+                            <li>
+                                <a href="#">You're now friend with Mike</a>
+                            </li>
+                            <li>
+                                <a href="#">Wish Mary on her birthday!</a>
+                            </li>
+                            <li>
+                                <a href="#">5 warnings in Server Console</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="d-lg-none d-md-block d-xl-none d-sm-block">
+                        <a href="#"><i class="material-icons">apps</i><span>apps</span></a>
+                    </li>
+
+                    <li class="d-lg-none d-md-block d-xl-none d-sm-block">
+                        <a href="#"><i class="material-icons">person</i><span>user</span></a>
+                    </li>
+
+                    <li class="d-lg-none d-md-block d-xl-none d-sm-block">
+                        <a href="#"><i class="material-icons">settings</i><span>setting</span></a>
+                    </li>
+                </div>
+
+
+                <li class="dropdown active">
+                    <a href="#master" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="material-icons">aspect_ratio</i><span>Master</span></a>
+                    <ul class="list-unstyled menu collapse show" id="master">
+                        <li class="active" style="background: rgb(201, 226, 255);">
+                            <a href="employee.html" style="padding-left: 15%;"><i
+                                    class="material-icons">person</i>Employee</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="material-icons">apps</i><span>widgets</span></a>
+                    <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../index.html" class="logout"><i class="material-icons">logout</i><span>Log Out</span></a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="top-navbar">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
+                            <span class="material-icons">menu</span>
+                        </button>
+                        <a class="navbar-brand" href="#">Add Employee</a>
+
+                        <button class="d-inline-block d-lg-none ml-auto more-button" type="button"
+                            data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="material-icons">menu</span>
+                        </button>
+
+                        <div class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none"
+                            id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="dropdown nav-item active">
+                                    <a href="#" class="nav-link" data-toggle="dropdown">
+                                        <span class="material-icons">notifications</span>
+                                        <span class="notification">4</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">You have 5 new messages</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">You're now friend with Mike</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Wish Mary on her birthday!</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">5 warnings in Server Console</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span class="material-icons">apps</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span class="material-icons">person</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span class="material-icons">settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="p-5 bg-white rounded shadow mb-5">
+                            <ul id="tab" role="tablist"
+                                class="nav nav-tabs nav-pills with-arrow lined flex-column flex-sm-row text-center">
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="Personal-tab" data-toggle="tab" href="#Personal" role="tab"
+                                        aria-controls="Personal" aria-selected="true"
+                                        class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0 active">Personal
+                                        Information</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="Education-tab" data-toggle="tab" href="#Education" role="tab"
+                                        aria-controls="Education" aria-selected="false"
+                                        class="nav-link text-uppercase font-weight-bold mr-sm-3 rounded-0">Education</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="Banking-tab" data-toggle="tab" href="#Banking" role="tab"
+                                        aria-controls="Banking" aria-selected="false"
+                                        class="nav-link text-uppercase font-weight-bold rounded-0">Banking</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="History-tab" data-toggle="tab" href="#History" role="tab"
+                                        aria-controls="History" aria-selected="false"
+                                        class="nav-link text-uppercase font-weight-bold rounded-0">Employemnet
+                                        History</a>
+                                </li>
+                                <li class="nav-item flex-sm-fill">
+                                    <a id="Other-tab" data-toggle="tab" href="#Other" role="tab" aria-controls="Other"
+                                        aria-selected="false"
+                                        class="nav-link text-uppercase font-weight-bold rounded-0">Other</a>
+                                </li>
+                            </ul>
+                            <div id="emplyeeContent" class="tab-content">
+                                <div id="Personal" role="tabpanel" aria-labelledby="Personal-tab"
+                                    class="tab-pane fade px-4 py-5 show active">
+                                    <form class="form-sample" id="personalInfo" method="post">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">First Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="fName"
+                                                            name="fName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Middle Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="mName"
+                                                            name="mName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Last Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="lName"
+                                                            name="lName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input id="personalPhoto" type="file" accept="image/*"
+                                                onchange="base64Encode('personalPhoto','attachment')" />
+                                            <input type="text" class="form-control" id="attachment" hidden />
+                                        </div>
+                                        <div class="row justify-content-center" id="personalDownload" hidden>
+                                            <h6>Personal Photo : </h6>
+                                            <button id="PersonalServerName" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'Profile','personalInfo','profileImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="profileImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class=" row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Mobile No</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="tel" id="mobile"
+                                                            name="mobile" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Gender</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="gender" name="gender"
+                                                            onchange="removeError1(this)">
+                                                            <option value="">Select</option>
+                                                            <option>Male</option>
+                                                            <option>Female</option>
+                                                            <option>Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" placeholder="dd/mm/yyyy" type="date"
+                                                            name="dob" id="dob" onchange="removeError1(this)" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Blood Grp</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="bloodGrp" name="bloodGrp">
+                                                            <option value="">Select</option>
+                                                            <option>A+</option>
+                                                            <option>A-</option>
+                                                            <option>B+</option>
+                                                            <option>B-</option>
+                                                            <option>AB+</option>
+                                                            <option>AB-</option>
+                                                            <option>O+</option>
+                                                            <option>O-</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Location</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="loc" name="loc"
+                                                            onchange="removeError1(this)">
+                                                            <option value="">Select</option>
+                                                            <option>Site</option>
+                                                            <option>Office</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Plant</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="plant" name="plant"
+                                                            onchange="removeError1(this)">
+                                                            <option value="">Select</option>
+                                                            <option>Gavhan</option>
+                                                            <option>Kundevahal</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Email</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="email" name="email"
+                                                            id="email" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Date of Joining</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" placeholder="dd/mm/yyyy" type="date"
+                                                            name="doj" id="doj" onchange="removeError1(this)" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Position</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="posApplied" name="posApplied"
+                                                            onchange="removeError1(this)">
+                                                            <option value="">Select</option>
+                                                            <option>Operator</option>
+                                                            <option>Site manager</option>
+                                                            <option>Labor</option>
+                                                            <option>Driver</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Marital Status</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="maritalStatus"
+                                                            name="maritalStatus">
+                                                            <option value="">Select</option>
+                                                            <option>Single</option>
+                                                            <option>Married</option>
+                                                            <option>Divorced</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Aadhar No.</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="aadhar"
+                                                            name="aadhar" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input id="aadharPhoto" type="file" accept="image/*"
+                                                onchange="base64Encode('aadharPhoto','aadharAttach')" />
+                                            <input type="text" class="form-control" id="aadharAttach" hidden />
+                                        </div>
+                                        <div class="row justify-content-center" id="aadharDownload" hidden>
+                                            <h6>Aadhar file : </h6>
+                                            <button id="aadharServerName" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'Aadhar','personalInfo','aadharImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="aadharImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">PAN No.</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="pan" name="pan" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input id="panPhoto" type="file" accept="image/*"
+                                                onchange="base64Encode('panPhoto','panAttach')" />
+                                            <input type="text" class="form-control" id="panAttach" hidden />
+                                        </div>
+                                        <div class="row justify-content-center" id="panDownload" hidden>
+                                            <h6>Pancard file : </h6>
+                                            <button id="panServerName" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'Pan','personalInfo','panImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="panImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">License No.</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="drivingLic"
+                                                            name="drivingLic" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input id="licensePhoto" type="file" accept="image/*"
+                                                onchange="base64Encode('licensePhoto','drivingAttach')" />
+                                            <input type="text" class="form-control" id="drivingAttach" hidden />
+                                        </div>
+                                        <div class="row justify-content-center" id="licenseDownload" hidden>
+                                            <h6>License file : </h6>
+                                            <button id="licenseServerName" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'Driving','personalInfo','licenseImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="licenseImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div id="residentialAddress">
+                                            <label class="my-4 font-weight-bold">Residential Address :</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Address</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="raddress"
+                                                                name="rAddress" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Pin Code</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control" id="rpincode"
+                                                                name="rPin" maxlength="6" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">State</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="rstate"
+                                                                name="rState" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Country</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="rcountry"
+                                                                name="rCountry" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-check form-check-flat form-check-primary">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" class="form-check-input" id="sameaddress"
+                                                    onclick="isSameAddress(this)">
+                                                Same as residential Address
+                                            </label>
+                                        </div>
+                                        <div id="permenantAddress">
+                                            <label class="my-4 font-weight-bold">Permenant Address :</label>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Address</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="paddress"
+                                                                name="pAddress" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Pin Code</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control" id="ppincode"
+                                                                name="pPin" maxlength="6" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row"> <label
+                                                            class="col-sm-3 col-form-label">State</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="pstate"
+                                                                name="pState" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row">
+                                                        <label class="col-sm-3 col-form-label">Country</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" class="form-control" id="pcountry"
+                                                                name="pCountry" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <label class="my-4 font-weight-bold">Emergency Contact :</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row"> <label
+                                                        class="col-sm-3 col-form-label">Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="name" name="name" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Number</label>
+                                                    <div class="col-sm-9">
+                                                        <input class="form-control" type="tel" id="emrMobile"
+                                                            name="emrMobile" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row"> <label
+                                                        class="col-sm-3 col-form-label">Relation</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="emrRelation"
+                                                            name="emrRelation" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"></label>
+                                                    <div class="col-sm-9">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-lg" href="#"
+                                                style="margin-top: 50px;" id="savePersonal"
+                                                onclick="persnalInfoValidation('personalInfo','savePersonal')">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="Education" role="tabpanel" aria-labelledby="Education-tab"
+                                    class="tab-pane fade px-4 py-5">
+                                    <div class="container">
+                                        <div style="text-align: end; margin: 20px;">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#eductaionModal" id="openEductaionModal"
+                                                onclick="addDataFormModal('eductaionModal','educationalInfo','educationImageName')"
+                                                style="justify-content: flex-end;">
+                                                Add new
+                                            </button>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="eductaionModal" data-bs-backdrop="static"
+                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLabel">Education
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body text-dark">
+                                                        <form class="form-sample" id="educationalInfo">
+                                                            <div class="conatiner">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"><small>Name <span
+                                                                                        class="required text-danger">(*)</span></small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="sclName" name="name" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class=" col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"><small>Passing
+                                                                                    Year <span
+                                                                                        class="required text-danger">(*)</span></small></label>
+                                                                            <input type="number" class="form-control"
+                                                                                id="passingYear" name="passingYear" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class=" form-label"><small>Percetage
+                                                                                    <span
+                                                                                        class="required text-danger">(*)</span></small></label>
+                                                                            <input type="number" class="form-control"
+                                                                                id="percentage" name="percentage" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"><small>Special
+                                                                                    Subject <span
+                                                                                        class="required text-danger">(*)</span></small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="splSub" name="splSub" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"><small>Degree
+                                                                                    <span
+                                                                                        class="required text-danger">(*)</span></small></label>
+                                                                            <select class="form-control"
+                                                                                onchange="removeError1(this); otherDegreeShowTextField('degree')"
+                                                                                id="degree">
+                                                                                <option value="">Select</option>
+                                                                                <option>Below SSC
+                                                                                </option>
+                                                                                <option>SSC</option>
+                                                                                <option>HSC</option>
+                                                                                <option>Under Graduate</option>
+                                                                                <option>Post Graduate</option>
+                                                                                <option>Other</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6" id="otherDegree" hidden>
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"><small>Degree
+                                                                                    Name<span
+                                                                                        class="required text-danger">(*)</span></small></label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="other" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <input id="educationfile" type="file"
+                                                                    accept="application/pdf, image/*"
+                                                                    onchange="base64Encode('educationfile','eduAttachment','eduExtension')" />
+                                                                <input type="text" class="form-control"
+                                                                    id="eduAttachment" name="attachment" hidden />
+                                                                <input type="text" class="form-control"
+                                                                    id="eduExtension" name="extension" hidden />
+                                                                <div class="row justify-content-center "
+                                                                    id="educationalInfoDownload" hidden>
+                                                                    <h6>Attachment : </h6>
+                                                                    <button id="educationalInfoImage"
+                                                                        class="btn btn-link"
+                                                                        onClick="return downloadAttachment(this,'listId','educationalInfo','educationImageLoader')"
+                                                                        style="color: blue;">
+                                                                    </button>
+                                                                    <div id="educationImageLoader"
+                                                                        style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                                        <h6><i class="fa fa-spinner fa-spin"></i>
+                                                                            Downlading...
+                                                                        </h6>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="text" id="educationalInfoListId" hidden />
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="container text-center">
+                                                            <button type="button" class="btn btn-danger" id="closeEdu"
+                                                                data-bs-dismiss="modal" style="margin: 20px;"
+                                                                onclick="closeModal('eductaionModal')">Close</button>
+                                                            <button type="button" class="btn btn-primary" id="saveEdu"
+                                                                onclick="educationFormValidation('educationalInfo','saveEdu','closeEdu')">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal End -->
+                                        <div class="table-responsive" style="margin-bottom: 40px;">
+                                            <table class="table table-striped" id="educationTable">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">index</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Passing Year</th>
+                                                        <th scope="col">Degree</th>
+                                                        <th scope="col">Special Subject</th>
+                                                        <th scope="col">Percetage</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="educationTableBody">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="Banking" role="tabpanel" aria-labelledby="Banking-tab"
+                                    class="tab-pane fade px-4 py-5">
+                                    <form class="form-sample" id="bankDetails">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Account Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="bankAccName"
+                                                            name="bankAccName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Bank Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="bankName"
+                                                            name="bankName" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Account No.</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="bankAccNo"
+                                                            name="bankAccNo" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">IFSC Code</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="ifscCode"
+                                                            name="ifscCode" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">MICR Code</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="micrCode"
+                                                            name="micrCode" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Branch Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="branch"
+                                                            name="branch" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label">Address</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="bankAdd"
+                                                            name="bankAdd" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <div class="col-sm-9">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input id="bankfile" type="file" accept="application/pdf, image/*"
+                                            onchange="base64Encode('bankfile','bankAttachment','bankExtension')" />
+                                        <input type="text" class="form-control" id="bankAttachment" name="attachment"
+                                            hidden />
+                                        <input type="text" class="form-control" id="bankExtension" name="extension"
+                                            hidden />
+                                        <div class="row justify-content-center " id="bankDownload" hidden>
+                                            <h6>Attachment : </h6>
+                                            <button id="bankImage" class="btn btn-link"
+                                                onClick="return downloadAttachment(this,'bankImage','bankDetails','bankImageLoader')"
+                                                style="color: blue;">
+                                            </button>
+                                            <div id="bankImageLoader"
+                                                style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                <h6><i class="fa fa-spinner fa-spin"></i>
+                                                    Downlading...
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-primary btn-lg" href="#"
+                                                style="margin-top: 50px;" id="saveBank"
+                                                onclick="bankingFormValidation('bankDetails','saveBank')">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div id="History" role="tabpanel" aria-labelledby="History-tab"
+                                    class="tab-pane fade px-4 py-5">
+                                    <div class="container">
+                                        <div style="text-align: end; margin: 20px;">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#empHistoryModal" id="openempHistoryModal"
+                                                onclick="addDataFormModal('empHistoryModal','empHistory')"
+                                                style="justify-content: flex-end;">
+                                                Add new
+                                            </button>
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="empHistoryModal" data-bs-backdrop="static"
+                                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLabel">Employee
+                                                            History
+                                                        </h5>
+                                                    </div>
+                                                    <div class="modal-body text-dark">
+                                                        <form class="form-sample" id="empHistory">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Company<span
+                                                                                    class="required text-danger">(*)</span></small></label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="company" name="company" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Date of
+                                                                                Joining<span
+                                                                                    class="required text-danger"></span></small></label>
+                                                                        <input type="date" class="form-control"
+                                                                            id="hisDOJ" name="doj"
+                                                                            onchange="removeError1(this)" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Last
+                                                                                Working Day<span
+                                                                                    class="required text-danger"></span></small></label>
+                                                                        <input type="date" class="form-control" id="lwd"
+                                                                            name="lwd" onchange="removeError1(this)" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class=" col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Position
+                                                                                Held<span
+                                                                                    class="required text-danger"></span></small></label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="positionHeld" name="positionHeld" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label class="form-label"><small>Responsibities<span
+                                                                                    class="required text-danger"></span></small></label>
+
+                                                                        <input type="text" class="form-control"
+                                                                            id="responsibities" name="responsibities" />
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <div class="form-group">
+                                                                            <label class="form-label"><small>Cost
+                                                                                    To
+                                                                                    Company<span
+                                                                                        class="required text-danger"></span></small></label>
+                                                                            <input type="number" class="form-control"
+                                                                                id="costToComp" name="costToComp" />
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group ">
+                                                                        <label class="form-label"><small>Expirence<span
+                                                                                    class="required text-danger"></span></small></label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="exp" name="exp" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group ">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <input id="empHistfile" type="file"
+                                                                accept="application/pdf, image/*"
+                                                                onchange="base64Encode('empHistfile','empAttachment','empHistExtension')" />
+                                                            <input type="text" class="form-control" id="empAttachment"
+                                                                name="attachment" hidden />
+                                                            <input type="text" class="form-control"
+                                                                id="empHistExtension" name="extension" hidden />
+                                                            <div class="row justify-content-center "
+                                                                id="empHistoryDownload" hidden>
+                                                                <h6>Attachment : </h6>
+                                                                <button id="empHistoryImage" class="btn btn-link"
+                                                                    onClick="return downloadAttachment(this,'empHistoryListId','empHistory','histImageLoader')"
+                                                                    style="color: blue;">
+                                                                </button>
+                                                                <div id="histImageLoader"
+                                                                    style="color: rgb(97, 97, 255); padding-left: 10px;visibility: hidden; display: none;">
+                                                                    <h6><i class="fa fa-spinner fa-spin"></i>
+                                                                        Downlading...
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                            <input type="text" class="form-control"
+                                                                id="empHistoryListId" hidden />
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="container text-center">
+                                                            <button type="button" class="btn btn-danger"
+                                                                data-bs-dismiss="modal" style="margin: 20px;"
+                                                                id="closeHist"
+                                                                onclick="closeModal('empHistoryModal')">Close</button>
+                                                            <button type="button" class="btn btn-primary" id="saveHist"
+                                                                onclick="historyFormValidation('empHistory','saveHist','closeHist')">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal End -->
+                                        <div class="table-responsive" style="margin-bottom: 40px;">
+                                            <table class="table table-striped" id="empHistoryTable">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th scope="col">index</th>
+                                                        <th scope="col">Company</th>
+                                                        <th scope="col">Position Held</th>
+                                                        <th scope="col">Date Of Joining</th>
+                                                        <th scope="col">Last Working Day</th>
+                                                        <th scope="col">Responsibities</th>
+                                                        <th scope="col">Cost To Company</th>
+                                                        <th scope="col">Expirence</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="empHistoryTableBody">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="Other" role="tabpanel" aria-labelledby="Other-tab"
+                                    class="tab-pane fade px-4 py-5">
+                                    <form class="form-sample" id="OtherForm">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal start -->
+                        <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="ModalCenterTitle"
+                            style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content align-items-center">
+                                    <div class="modal-header" style="margin-top: 15px;">
+                                        <h5 id="contentText"></h5>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-5"></div>
+                                            <button type="button" class="btn btn-danger btn-sm align-self-center col-2"
+                                                style="margin-top: 10px;margin-bottom: 10px;" data-bs-dismiss="modal"
+                                                onclick="closeModal('addEmployeeModal')">Close</button>
+                                            <div class="col-5"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal end -->
+                        <!-- Modal start -->
+                        <div class="modal fade" id="deleteInfoModal" tabindex="-1" aria-labelledby="ModalCenterTitle"
+                            style="display: none;" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content align-items-center">
+                                    <div class="modal-header" style="margin-top: 15px;">
+                                        <h5 id="contentText2">
+                                            Are you want to delete?
+                                        </h5>
+                                    </div>
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <!-- <div class="col-3"></div> -->
+                                            <button type="button" class="btn btn-primary btn-sm align-self-center"
+                                                style="margin-top: 10px;margin-bottom: 10px;" data-bs-dismiss="modal"
+                                                id="No" onclick="closeModal('deleteInfoModal')">No</button>
+                                            <div class="col-1"></div>
+                                            <button type="button" class="btn btn-danger btn-sm align-self-center"
+                                                style="margin-top: 10px;margin-bottom: 10px;" data-bs-dismiss="modal"
+                                                id="Yes" onclick="deleteEducationAndHistory()">Yes</button>
+                                            <input type="text" id="deleteInfoId" hidden />
+                                            <!-- <div class="col-3"></div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal end -->
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row justify-content-end">
+                        <div id="myfooter">
+                            <div class="footer">
+                                <div class="copyright">
+                                    <p>Copyright © Designed &amp; Developed by <a href="https://o2bizservices.com/"
+                                            target="_blank" style="color: blue;">O2Biz
+                                            Services</a> 2021</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/script-library.js"></script>
+
+
+    <script type="text/javascript">
+        var executed = false;
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#content').toggleClass('active');
+            });
+
+            $('.more-button,.body-overlay').on('click', function () {
+                $('#sidebar,.body-overlay').toggleClass('show-nav');
+            });
+            if (location.search == '') {
+                $('#Education-tab').toggleClass('disabled');
+                $('#Banking-tab').toggleClass('disabled');
+                $('#History-tab').toggleClass('disabled');
+                $('#Other-tab').toggleClass('disabled');
+            } else {
+                if (!executed) {
+                    executed = true;
+                    getEployeeDetails(location.search.split('=')[1]);
+                };
+            }
+        });
+    </script>
+
+</body>
+
+</html>
