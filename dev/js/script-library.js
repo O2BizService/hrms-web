@@ -723,7 +723,7 @@ function emptyIfNull(value) {
 function getAllEployeeDetails() {
     $('#employeeTable').DataTable().destroy();
     $("#employeeTableBody").html('');
-    var map = { 'limit': '50' }
+    var map = { 'limit': '' }
     $.ajax({
         type: 'POST',
         headers: {
